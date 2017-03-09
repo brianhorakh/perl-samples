@@ -1,0 +1,1472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns0="http://www.despegar.com/hotels/ota/v1/" targetNamespace="http://www.despegar.com/hotels/ota/v1/" elementFormDefault="qualified">
+   <xsd:complexType name="ratePlan">
+      <xsd:sequence>
+         <xsd:element name="DateRange" type="ns0:dateRange" minOccurs="0"/>
+         <xsd:element name="RatePlanCandidates" type="ns0:ratePlanCandidatesType" minOccurs="0"/>
+         <xsd:element name="HotelRef" type="ns0:hotelRef"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelInvCountRequest">
+      <xsd:sequence>
+         <xsd:element name="DateRange" type="ns0:dateRange"/>
+         <xsd:element name="RoomTypeCandidates" type="ns0:roomTypeCandidates" minOccurs="0"/>
+         <xsd:element name="HotelRef" type="ns0:hotelRef"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="statusApplicationControl">
+      <xsd:sequence/>
+      <xsd:attribute name="InvCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="RatePlanCode" type="xsd:string"/>
+      <xsd:attribute name="Start" type="xsd:string"/>
+      <xsd:attribute name="End" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="taxes">
+      <xsd:sequence>
+         <xsd:element name="Tax" type="ns0:tax" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="Amount" type="xsd:string"/>
+      <xsd:attribute name="CurrencyCode" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="discount">
+      <xsd:sequence>
+         <xsd:element name="DiscountReason" type="ns0:paragraph"/>
+      </xsd:sequence>
+      <xsd:attribute name="Percent" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelPolicies">
+      <xsd:sequence>
+         <xsd:element name="Policy" type="ns0:hotelPolicy" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelResModifyNotifRQ">
+      <xsd:sequence>
+         <xsd:element name="HotelResModifies" type="ns0:hotelResModifies"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="invCounts">
+      <xsd:sequence>
+         <xsd:element name="InvCount" type="ns0:invCount" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="resRetrieveRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="ReservationsList" type="ns0:reservationsList" minOccurs="0"/>
+         <xsd:element name="Warnings" type="ns0:warnings" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="MoreIndicator" type="xsd:boolean"/>
+      <xsd:attribute name="MoreDataEchoToken" type="xsd:int"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="readRQ">
+      <xsd:sequence>
+         <xsd:element name="POS" type="ns0:pos" minOccurs="0"/>
+         <xsd:element name="ReadRequests" type="ns0:readRequests"/>
+         <xsd:element name="UniqueID" type="ns0:uniqueID" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="MaxResponses" type="xsd:int"/>
+      <xsd:attribute name="MoreDataEchoToken" type="xsd:int"/>
+   </xsd:complexType>
+   <xsd:complexType name="paymentCard">
+      <xsd:sequence>
+         <xsd:element name="CardType" type="xsd:string"/>
+         <xsd:element name="CardHolderName" type="xsd:string"/>
+         <xsd:element name="CardNumber" type="ns0:encryptionToken"/>
+         <xsd:element name="SeriesCode" type="ns0:encryptionToken"/>
+      </xsd:sequence>
+      <xsd:attribute name="ExpireDate" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelAvailRequest">
+      <xsd:sequence>
+         <xsd:element name="DateRange" type="ns0:dateRange" minOccurs="0"/>
+         <xsd:element name="RoomTypeCandidates" type="ns0:roomTypeCandidates" minOccurs="0"/>
+         <xsd:element name="RatePlanCandidates" type="ns0:ratePlanCandidates" minOccurs="0"/>
+         <xsd:element name="HotelRef" type="ns0:hotelRef"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="inventories">
+      <xsd:sequence>
+         <xsd:element name="Inventory" type="ns0:inventory" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="acceptedPayment">
+      <xsd:sequence>
+         <xsd:element name="PaymentCard" type="ns0:paymentCard" minOccurs="0"/>
+         <xsd:element name="BankAcct" type="ns0:bankAcct" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="GuaranteeTypeCode" type="ns0:PaymentType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="invCount">
+      <xsd:sequence/>
+      <xsd:attribute name="ActionType" type="ns0:ActionType" use="required"/>
+      <xsd:attribute name="CountType" type="ns0:CountType" use="required"/>
+      <xsd:attribute name="Count" type="xsd:int" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="text">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:string">
+            <xsd:attribute name="Formatted" type="xsd:boolean"/>
+            <xsd:attribute name="TextFormat" type="ns0:TextFormat"/>
+            <xsd:attribute name="Language" type="xsd:string"/>
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="acceptedPayments">
+      <xsd:sequence>
+         <xsd:element name="AcceptedPayment" type="ns0:acceptedPayment" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="rate4">
+      <xsd:sequence>
+         <xsd:element name="BaseByGuestAmts" type="ns0:baseByGuestAmts" minOccurs="0"/>
+         <xsd:element name="AdditionalGuestAmounts" type="ns0:additionalGuestAmounts" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Start" type="xsd:string"/>
+      <xsd:attribute name="End" type="xsd:string"/>
+      <xsd:attribute name="InvCode" type="xsd:string"/>
+      <xsd:attribute name="AgeQualifyingCode" type="xsd:string"/>
+      <xsd:attribute name="AgeTimeUnit" type="ns0:TimeUnit"/>
+      <xsd:attribute name="MinAge" type="xsd:int"/>
+      <xsd:attribute name="MaxAge" type="xsd:int"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelAvailRequests">
+      <xsd:sequence>
+         <xsd:element name="HotelAvailRequest" type="ns0:hotelAvailRequest" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlans1">
+      <xsd:sequence>
+         <xsd:element name="RatePlan" type="ns0:ratePlan3" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="profile">
+      <xsd:sequence>
+         <xsd:element name="Customer" type="ns0:customer" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="ProfileType" type="ns0:ProfileType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="guaranteeAccepted">
+      <xsd:sequence>
+         <xsd:element name="PaymentCard" type="ns0:paymentCard"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlans3">
+      <xsd:sequence>
+         <xsd:element name="RatePlan" type="ns0:hotelRatePlanType" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="HotelCode" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelTaxPolicies">
+      <xsd:sequence>
+         <xsd:element name="TaxPolicy" type="ns0:hotelTaxPolicy" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="additionalCharge">
+      <xsd:sequence>
+         <xsd:element name="Amount" type="ns0:total" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="RoomAmenityCode" type="ns0:RoomAmenityType"/>
+      <xsd:attribute name="Quantity" type="xsd:int"/>
+   </xsd:complexType>
+   <xsd:complexType name="lengthOfStay">
+      <xsd:sequence/>
+      <xsd:attribute name="MinMaxMessageType" type="ns0:MinMaxMessageType" use="required"/>
+      <xsd:attribute name="Time" type="xsd:int" use="required"/>
+      <xsd:attribute name="TimeUnit" type="ns0:TimeUnit" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="additionalCharges">
+      <xsd:sequence>
+         <xsd:element name="AdditionalCharge" type="ns0:additionalCharge" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="readRequests">
+      <xsd:sequence>
+         <xsd:element name="HotelReadRequest" type="ns0:hotelReadRequest" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlan3">
+      <xsd:sequence>
+         <xsd:element name="Rates" type="ns0:hotelRatePlanTypeRates"/>
+      </xsd:sequence>
+      <xsd:attribute name="ChargeTypeCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="CurrencyCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="RatePlanCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRef">
+      <xsd:sequence/>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="guaranteePayment">
+      <xsd:sequence>
+         <xsd:element name="AcceptedPayments" type="ns0:acceptedPayments" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="GuaranteeType" type="ns0:GuaranteeType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="paragraph">
+      <xsd:sequence>
+         <xsd:element name="Text" type="ns0:text"/>
+      </xsd:sequence>
+      <xsd:attribute name="Name" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="linkedRestrictions">
+      <xsd:sequence/>
+      <xsd:attribute name="MinLOS" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="MaxLOS" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="CloseToArrival" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="CloseToDeparture" type="xsd:boolean" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="dateRange">
+      <xsd:sequence/>
+      <xsd:attribute name="Start" type="xsd:date" use="required"/>
+      <xsd:attribute name="End" type="xsd:date" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="roomTypeCandidates">
+      <xsd:sequence>
+         <xsd:element name="RoomTypeCandidate" type="ns0:roomTypeCandidate" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="availStatusMessages">
+      <xsd:sequence>
+         <xsd:element name="AvailStatusMessage" type="ns0:availStatusMessage" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="bankAcct">
+      <xsd:sequence/>
+      <xsd:attribute name="Type" type="ns0:BankAccountType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="guarantee">
+      <xsd:sequence>
+         <xsd:element name="GuaranteesAccepted" type="ns0:guaranteeAccepted" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="GuaranteeType" type="ns0:GuaranteeType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelTaxPolicy">
+      <xsd:sequence/>
+      <xsd:attribute name="Type" type="ns0:HotelTaxType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveInfo">
+      <xsd:sequence/>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRatePlanType">
+      <xsd:sequence>
+         <xsd:element name="Rates" type="ns0:hotelRatePlanTypeRates" minOccurs="0"/>
+         <xsd:element name="Description" type="ns0:paragraph" minOccurs="0"/>
+         <xsd:element name="LinkedRestrictions" type="ns0:linkedRestrictions" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="CurrencyCode" type="xsd:string"/>
+      <xsd:attribute name="ChargeTypeCode" type="xsd:string"/>
+      <xsd:attribute name="RatePlanCode" type="xsd:string"/>
+      <xsd:attribute name="AdjustedAmount" type="xsd:string"/>
+      <xsd:attribute name="AdjustedPercentage" type="xsd:string"/>
+      <xsd:attribute name="AdjustUpIndicator" type="xsd:boolean"/>
+      <xsd:attribute name="BaseRatePlanCode" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="additionalGuestAmount">
+      <xsd:sequence/>
+      <xsd:attribute name="Amount" type="xsd:string"/>
+      <xsd:attribute name="AgeQualifyingCode" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="notifDetails">
+      <xsd:sequence>
+         <xsd:element name="HotelNotifReport" type="ns0:hotelNotifReport"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="selectionCriteria">
+      <xsd:sequence/>
+      <xsd:attribute name="DateType" type="ns0:DateType"/>
+      <xsd:attribute name="Start" type="xsd:string"/>
+      <xsd:attribute name="End" type="xsd:string"/>
+      <xsd:attribute name="SelectionType" type="ns0:SelectionType"/>
+      <xsd:attribute name="ResStatus" type="ns0:ResStatus"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelAvailNotifRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="Warnings" type="ns0:warnings" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+      <xsd:attribute name="TransactionIdentifier" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="pos">
+      <xsd:sequence>
+         <xsd:element name="Source" type="ns0:source"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelAvailNotifRQ">
+      <xsd:sequence>
+         <xsd:element name="POS" type="ns0:pos" minOccurs="0"/>
+         <xsd:element name="AvailStatusMessages" type="ns0:availStatusMessages"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelResModify">
+      <xsd:sequence>
+         <xsd:element name="POS" type="ns0:pos" minOccurs="0"/>
+         <xsd:element name="ResGlobalInfo" type="ns0:resGlobalInfo"/>
+         <xsd:element name="ResGuests" type="ns0:resGuests"/>
+         <xsd:element name="RoomStays" type="ns0:roomStays"/>
+      </xsd:sequence>
+      <xsd:attribute name="ResStatus" type="ns0:ResStatus" use="required"/>
+      <xsd:attribute name="CreateDateTime" type="xsd:string" use="required"/>
+      <xsd:attribute name="LastModifyDateTime" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="depositPayments">
+      <xsd:sequence>
+         <xsd:element name="GuaranteePayment" type="ns0:guaranteePayment" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="deadline">
+      <xsd:sequence/>
+      <xsd:attribute name="AbsoluteDeadline" type="xsd:string"/>
+      <xsd:attribute name="OffsetDropTime" type="ns0:OffsetDropTime"/>
+      <xsd:attribute name="OffsetTimeUnit" type="ns0:TimeUnit"/>
+      <xsd:attribute name="OffsetUnitMultiplier" type="xsd:int"/>
+   </xsd:complexType>
+   <xsd:complexType name="email">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:string">
+            <xsd:attribute name="EmailType" type="ns0:EmailType"/>
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="cancelPenalties">
+      <xsd:sequence>
+         <xsd:element name="CancelPenalty" type="ns0:cancelPenalty" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="baseByGuestAmts">
+      <xsd:sequence>
+         <xsd:element name="BaseByGuestAmt" type="ns0:baseByGuestAmt" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="profileInfo">
+      <xsd:sequence>
+         <xsd:element name="UniqueID" type="ns0:uniqueID"/>
+         <xsd:element name="Profile" type="ns0:profile"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="resGuest">
+      <xsd:sequence>
+         <xsd:element name="Comments" type="ns0:comments" minOccurs="0"/>
+         <xsd:element name="Profiles" type="ns0:profiles" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="ArrivalTime" type="xsd:string"/>
+      <xsd:attribute name="ResGuestRPH" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="roomRateType">
+      <xsd:sequence>
+         <xsd:element name="Rates" type="ns0:rates" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="RoomTypeCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="RatePlanCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="NumberOfUnits" type="xsd:int" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelService">
+      <xsd:sequence/>
+      <xsd:attribute name="MealPlanCode" type="ns0:MealPlanType" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="roomTypeCandidate">
+      <xsd:sequence/>
+      <xsd:attribute name="RoomTypeCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="resGlobalInfo">
+      <xsd:sequence>
+         <xsd:element name="HotelReservationIDs" type="ns0:hotelReservationIds"/>
+         <xsd:element name="DepositPayments" type="ns0:depositPayments" minOccurs="0"/>
+         <xsd:element name="Guarantee" type="ns0:guarantee" minOccurs="0"/>
+         <xsd:element name="CancelPenalties" type="ns0:cancelPenalties" minOccurs="0"/>
+         <xsd:element name="Fees" type="ns0:fees" minOccurs="0"/>
+         <xsd:element name="SpecialRequests" type="ns0:specialRequests" minOccurs="0"/>
+         <xsd:element name="Total" type="ns0:total"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="specialRequests">
+      <xsd:sequence>
+         <xsd:element name="SpecialRequest" type="ns0:paragraph" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="notifReportRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlans">
+      <xsd:sequence>
+         <xsd:element name="RatePlan" type="ns0:ratePlan" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveContent">
+      <xsd:sequence>
+         <xsd:element name="FacilityInfo" type="ns0:facilityInfo" minOccurs="0"/>
+         <xsd:element name="Policies" type="ns0:hotelPolicies" minOccurs="0"/>
+         <xsd:element name="HotelInfo" type="ns0:hotelInfo" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="HotelName" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="notifReportRQ">
+      <xsd:sequence>
+         <xsd:element name="NotifDetails" type="ns0:notifDetails"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="roomStay">
+      <xsd:sequence>
+         <xsd:element name="RoomRates" type="ns0:roomRates"/>
+         <xsd:element name="TimeSpan" type="ns0:dateRange"/>
+         <xsd:element name="GuestCounts" type="ns0:guestCounts"/>
+         <xsd:element name="BasicPropertyInfo" type="ns0:hotelRef"/>
+         <xsd:element name="ResGuestRPHs" type="ns0:resGuestRPHs" minOccurs="0"/>
+         <xsd:element name="Total" type="ns0:total" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelInvCountRQ">
+      <xsd:sequence>
+         <xsd:element name="HotelInvCountRequests" type="ns0:hotelInvCountRequests"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelInvCountRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="Warnings" type="ns0:warnings" minOccurs="0"/>
+         <xsd:element name="Inventories" type="ns0:inventories" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="cancelPenalty">
+      <xsd:sequence>
+         <xsd:element name="AmountPercent" type="ns0:amountPercent"/>
+         <xsd:element name="Deadline" type="ns0:deadline" minOccurs="0"/>
+         <xsd:element name="PenaltyDescription" type="ns0:paragraph" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="PolicyCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="fees">
+      <xsd:sequence>
+         <xsd:element name="Fee" type="ns0:fee" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlanCandidates">
+      <xsd:sequence>
+         <xsd:element name="RatePlanCandidate" type="ns0:ratePlanCandidate" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="fee">
+      <xsd:sequence>
+         <xsd:element name="Description" type="ns0:paragraph"/>
+         <xsd:element name="ChargeFrequency" type="ns0:ChargeType" minOccurs="0"/>
+         <xsd:element name="ChargeUnit" type="ns0:ChargeType" minOccurs="0"/>
+         <xsd:element name="EffectiveDate" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="ExpireDate" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Amount" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Percent" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="guestCounts">
+      <xsd:sequence>
+         <xsd:element name="GuestCount" type="ns0:guestCount" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="source">
+      <xsd:sequence>
+         <xsd:element name="RequestorID" type="ns0:uniqueID" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="ISOCountry" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelPolicy">
+      <xsd:sequence>
+         <xsd:element name="CommissionPolicy" type="ns0:hotelCommissionPolicy" minOccurs="0"/>
+         <xsd:element name="TaxPolicies" type="ns0:hotelTaxPolicies" minOccurs="0"/>
+         <xsd:element name="StayRequirements" type="ns0:hotelStayRequirements" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="DefaultValidBookingMinOffset" type="xsd:int" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelResNotifRQ">
+      <xsd:sequence>
+         <xsd:element name="HotelReservations" type="ns0:hotelReservations"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="cancelRQ">
+      <xsd:sequence>
+         <xsd:element name="UniqueID" type="ns0:uniqueID" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="errorRS">
+      <xsd:sequence/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="Status" type="ns0:ErrorStatus"/>
+      <xsd:attribute name="ErrorCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="ErrorMessage" type="xsd:string"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelReservationIds">
+      <xsd:sequence>
+         <xsd:element name="HotelReservationID" type="ns0:hotelReservationId" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="baseByGuestAmt">
+      <xsd:sequence/>
+      <xsd:attribute name="AmountAfterTax" type="xsd:string"/>
+      <xsd:attribute name="AmountBeforeTax" type="xsd:string"/>
+      <xsd:attribute name="NumberOfGuests" type="xsd:int" use="required"/>
+      <xsd:attribute name="AgeQualifyingCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="stayRequirement">
+      <xsd:sequence/>
+      <xsd:attribute name="MaxLOS" type="xsd:int"/>
+      <xsd:attribute name="MinLOS" type="xsd:int"/>
+      <xsd:attribute name="StayContext" type="ns0:StayContext"/>
+      <xsd:attribute name="Fri" type="xsd:string"/>
+      <xsd:attribute name="Mon" type="xsd:string"/>
+      <xsd:attribute name="Sat" type="xsd:string"/>
+      <xsd:attribute name="Sun" type="xsd:string"/>
+      <xsd:attribute name="Thur" type="xsd:string"/>
+      <xsd:attribute name="Tue" type="xsd:string"/>
+      <xsd:attribute name="Weds" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="warning">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:string">
+            <xsd:attribute name="Type" type="ns0:EWT" use="required"/>
+            <xsd:attribute name="Code" type="xsd:string" use="required"/>
+            <xsd:attribute name="RecordID" type="xsd:string"/>
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="typeRoom">
+      <xsd:sequence/>
+      <xsd:attribute name="StandardOccupancy" type="xsd:int"/>
+      <xsd:attribute name="Name" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveInfos">
+      <xsd:sequence>
+         <xsd:element name="HotelDescriptiveInfo" type="ns0:hotelDescriptiveInfo"/>
+      </xsd:sequence>
+      <xsd:attribute name="LangRequested" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelCommissionPolicy">
+      <xsd:sequence/>
+      <xsd:attribute name="CommissionApplicability" type="ns0:CommissionApplicability" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="additionalGuestAmounts">
+      <xsd:sequence>
+         <xsd:element name="AdditionalGuestAmount" type="ns0:additionalGuestAmount" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveContentsConfirm">
+      <xsd:sequence>
+         <xsd:element name="HotelDescriptiveContent" type="ns0:hotelDescriptiveContentConfirm"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveContents">
+      <xsd:sequence>
+         <xsd:element name="HotelDescriptiveContent" type="ns0:hotelDescriptiveContent"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelAvailGetRQ">
+      <xsd:sequence>
+         <xsd:element name="POS" type="ns0:pos" minOccurs="0"/>
+         <xsd:element name="HotelAvailRequests" type="ns0:hotelAvailRequests"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="profiles">
+      <xsd:sequence>
+         <xsd:element name="ProfileInfo" type="ns0:profileInfo" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="roomStays">
+      <xsd:sequence>
+         <xsd:element name="RoomStay" type="ns0:roomStay" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="rateTypeRate">
+      <xsd:sequence>
+         <xsd:element name="Base" type="ns0:total" minOccurs="0"/>
+         <xsd:element name="Total" type="ns0:total" minOccurs="0"/>
+         <xsd:element name="AdditionalCharges" type="ns0:additionalCharges" minOccurs="0"/>
+         <xsd:element name="Discount" type="ns0:discount" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="EffectiveDate" type="xsd:string"/>
+      <xsd:attribute name="ExpireDate" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="tax">
+      <xsd:sequence>
+         <xsd:element name="TaxDescription" type="ns0:paragraph" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="Amount" type="xsd:string"/>
+      <xsd:attribute name="Percent" type="xsd:string"/>
+      <xsd:attribute name="CurrencyCode" type="xsd:string"/>
+      <xsd:attribute name="EffectiveDate" type="xsd:string"/>
+      <xsd:attribute name="ExpireDate" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="resGuestRPH">
+      <xsd:sequence/>
+      <xsd:attribute name="RPH" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelAvailGetRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="Warnings" type="ns0:warnings" minOccurs="0"/>
+         <xsd:element name="AvailStatusMessages" type="ns0:availStatusMessages" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="encryptionToken">
+      <xsd:sequence>
+         <xsd:element name="PlainText" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Token" type="xsd:string"/>
+      <xsd:attribute name="Mask" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelInfo">
+      <xsd:sequence>
+         <xsd:element name="Services" type="ns0:hotelServices" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="success"/>
+   <xsd:complexType name="hotelReservationConfirm">
+      <xsd:sequence>
+         <xsd:element name="UniqueID" type="ns0:uniqueID"/>
+      </xsd:sequence>
+      <xsd:attribute name="LastModifyDateTime" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlanCandidatesType">
+      <xsd:sequence>
+         <xsd:element name="RatePlanCandidate" type="ns0:ratePlanCandidatesTypeRatePlanCandidate"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="errors">
+      <xsd:sequence>
+         <xsd:element name="Error" type="ns0:error" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelReservation">
+      <xsd:sequence>
+         <xsd:element name="POS" type="ns0:pos" minOccurs="0"/>
+         <xsd:element name="ResGlobalInfo" type="ns0:resGlobalInfo"/>
+         <xsd:element name="ResGuests" type="ns0:resGuests"/>
+         <xsd:element name="RoomStays" type="ns0:roomStays"/>
+      </xsd:sequence>
+      <xsd:attribute name="ResStatus" type="ns0:ResStatus" use="required"/>
+      <xsd:attribute name="CreateDateTime" type="xsd:string" use="required"/>
+      <xsd:attribute name="LastModifyDateTime" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="guestRooms">
+      <xsd:sequence>
+         <xsd:element name="GuestRoom" type="ns0:guestRoom" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveContentConfirm">
+      <xsd:sequence/>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveInfoRQ">
+      <xsd:sequence>
+         <xsd:element name="POS" type="ns0:pos" minOccurs="0"/>
+         <xsd:element name="HotelDescriptiveInfos" type="ns0:hotelDescriptiveInfos"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelDescriptiveInfoRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="HotelDescriptiveContents" type="ns0:hotelDescriptiveContents" minOccurs="0"/>
+         <xsd:element name="Warnings" type="ns0:warnings" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="error">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:string">
+            <xsd:attribute name="Type" type="ns0:EWT" use="required"/>
+            <xsd:attribute name="Code" type="xsd:string"/>
+            <xsd:attribute name="NodeList" type="xsd:string"/>
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="inventory">
+      <xsd:sequence>
+         <xsd:element name="InvCounts" type="ns0:invCounts"/>
+         <xsd:element name="StatusApplicationControl" type="ns0:statusApplicationControl" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRatePlanRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="RatePlans" type="ns0:ratePlans3" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRatePlanRQ">
+      <xsd:sequence>
+         <xsd:element name="RatePlans" type="ns0:ratePlans"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelReservationsConfirm">
+      <xsd:sequence>
+         <xsd:element name="HotelReservation" type="ns0:hotelReservationConfirm" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="total">
+      <xsd:sequence>
+         <xsd:element name="Taxes" type="ns0:taxes" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="AmountAfterTax" type="xsd:string" use="required"/>
+      <xsd:attribute name="CurrencyCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="AmountIncludingMarkup" type="xsd:boolean"/>
+      <xsd:attribute name="AdditionalFeesExcludedIndicator" type="xsd:boolean"/>
+      <xsd:attribute name="RateOverrideIndicator" type="xsd:boolean"/>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlanCandidatesTypeRatePlanCandidate">
+      <xsd:sequence/>
+      <xsd:attribute name="RatePlanCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="resGuestRPHs">
+      <xsd:sequence>
+         <xsd:element name="ResGuestRPH" type="ns0:resGuestRPH" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="lengthsOfStay">
+      <xsd:sequence>
+         <xsd:element name="LengthOfStay" type="ns0:lengthOfStay" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="roomRates">
+      <xsd:sequence>
+         <xsd:element name="RoomRate" type="ns0:roomRateType" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="restrictionStatus">
+      <xsd:sequence/>
+      <xsd:attribute name="MinAdvancedBookingOffset" type="xsd:string"/>
+      <xsd:attribute name="MaxAdvancedBookingOffset" type="xsd:string"/>
+      <xsd:attribute name="Restriction" type="ns0:RestrictionType"/>
+      <xsd:attribute name="Status" type="ns0:RestrictionStatusType"/>
+   </xsd:complexType>
+   <xsd:complexType name="guestRoom">
+      <xsd:sequence>
+         <xsd:element name="TypeRoom" type="ns0:typeRoom"/>
+      </xsd:sequence>
+      <xsd:attribute name="MaxAdultOccupancy" type="xsd:int" use="required"/>
+      <xsd:attribute name="MaxChildOccupancy" type="xsd:int" use="required"/>
+      <xsd:attribute name="MaxOccupancy" type="xsd:int" use="required"/>
+      <xsd:attribute name="MinOccupancy" type="xsd:int" use="required"/>
+      <xsd:attribute name="ID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="uniqueID">
+      <xsd:sequence/>
+      <xsd:attribute name="Type" type="ns0:UIT" use="required"/>
+      <xsd:attribute name="ID" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="resGuests">
+      <xsd:sequence>
+         <xsd:element name="ResGuest" type="ns0:resGuest" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRatePlanNotifRS">
+      <xsd:sequence>
+         <xsd:choice>
+            <xsd:element name="Errors" type="ns0:errors" minOccurs="0"/>
+            <xsd:element name="Success" type="ns0:success" minOccurs="0"/>
+         </xsd:choice>
+         <xsd:element name="Warnings" type="ns0:warnings" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="CorrelationID" type="xsd:string" use="required"/>
+      <xsd:attribute name="TransactionIdentifier" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="facilityInfo">
+      <xsd:sequence>
+         <xsd:element name="GuestRooms" type="ns0:guestRooms"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="comments">
+      <xsd:sequence>
+         <xsd:element name="Comment" type="ns0:comment" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="availStatusMessage">
+      <xsd:sequence>
+         <xsd:element name="StatusApplicationControl" type="ns0:statusApplicationControl" minOccurs="0"/>
+         <xsd:element name="LengthsOfStay" type="ns0:lengthsOfStay" minOccurs="0"/>
+         <xsd:element name="RestrictionStatus" type="ns0:restrictionStatus" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="BookingLimit" type="xsd:int"/>
+      <xsd:attribute name="BookingLimitMessageType" type="ns0:BookingLimitMessageType"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRatePlanNotifRQ">
+      <xsd:sequence>
+         <xsd:element name="RatePlans" type="ns0:ratePlans1"/>
+      </xsd:sequence>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="warnings">
+      <xsd:sequence>
+         <xsd:element name="Warning" type="ns0:warning" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelRatePlanTypeRates">
+      <xsd:sequence>
+         <xsd:element name="Rate" type="ns0:rate4" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="rates">
+      <xsd:sequence>
+         <xsd:element name="Rate" type="ns0:rateTypeRate" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelReadRequest">
+      <xsd:sequence>
+         <xsd:element name="SelectionCriteria" type="ns0:selectionCriteria" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="HotelCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelNotifReport">
+      <xsd:sequence>
+         <xsd:element name="HotelDescriptiveContents" type="ns0:hotelDescriptiveContentsConfirm"/>
+         <xsd:element name="HotelReservations" type="ns0:hotelReservationsConfirm"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelReservations">
+      <xsd:sequence>
+         <xsd:element name="HotelReservation" type="ns0:hotelReservation" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelReservationId">
+      <xsd:sequence/>
+      <xsd:attribute name="ResID_Type" type="ns0:UIT" use="required"/>
+      <xsd:attribute name="ResID_Value" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="ratePlanCandidate">
+      <xsd:sequence/>
+      <xsd:attribute name="RatePlanCode" type="xsd:string" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelResModifies">
+      <xsd:sequence>
+         <xsd:element name="HotelResModify" type="ns0:hotelResModify" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="personName">
+      <xsd:sequence>
+         <xsd:element name="GivenName" type="xsd:string"/>
+         <xsd:element name="MiddleName" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Surname" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="reservationsList">
+      <xsd:sequence>
+         <xsd:element name="HotelReservation" type="ns0:hotelReservation" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelStayRequirements">
+      <xsd:sequence>
+         <xsd:element name="StayRequirement" type="ns0:stayRequirement" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hotelServices">
+      <xsd:sequence>
+         <xsd:element name="Service" type="ns0:hotelService" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="amountPercent">
+      <xsd:sequence/>
+      <xsd:attribute name="Percent" type="xsd:string"/>
+      <xsd:attribute name="NmbrOfNights" type="xsd:int"/>
+      <xsd:attribute name="Amount" type="xsd:string"/>
+      <xsd:attribute name="CurrencyCode" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:complexType name="comment">
+      <xsd:sequence>
+         <xsd:element name="Text" type="ns0:text"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="guestCount">
+      <xsd:sequence/>
+      <xsd:attribute name="AgeQualifyingCode" type="ns0:EmailType" use="required"/>
+      <xsd:attribute name="Count" type="xsd:int" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="hotelInvCountRequests">
+      <xsd:sequence>
+         <xsd:element name="HotelInvCountRequest" type="ns0:hotelInvCountRequest" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="customer">
+      <xsd:sequence>
+         <xsd:element name="PersonName" type="ns0:personName"/>
+         <xsd:element name="Email" type="ns0:email" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="OTA_HotelRatePlanRS" type="ns0:hotelRatePlanRS"/>
+   <xsd:element name="OTA_HotelResModifyNotifRQ" type="ns0:hotelResModifyNotifRQ"/>
+   <xsd:element name="OTA_HotelRatePlanRQ" type="ns0:hotelRatePlanRQ"/>
+   <xsd:element name="OTA_HotelAvailGetRS" type="ns0:hotelAvailGetRS"/>
+   <xsd:element name="OTA_HotelRatePlanNotifRS" type="ns0:hotelRatePlanNotifRS"/>
+   <xsd:element name="OTA_HotelDescriptiveInfoRQ" type="ns0:hotelDescriptiveInfoRQ"/>
+   <xsd:element name="OTA_ResRetrieveRS" type="ns0:resRetrieveRS"/>
+   <xsd:element name="OTA_HotelRatePlanNotifRQ" type="ns0:hotelRatePlanNotifRQ"/>
+   <xsd:element name="OTA_HotelDescriptiveInfoRS" type="ns0:hotelDescriptiveInfoRS"/>
+   <xsd:element name="OTA_HotelAvailNotifRS" type="ns0:hotelAvailNotifRS"/>
+   <xsd:element name="OTA_NotifReportRQ" type="ns0:notifReportRQ"/>
+   <xsd:element name="OTA_HotelInvCountRS" type="ns0:hotelInvCountRS"/>
+   <xsd:element name="OTA_HotelAvailNotifRQ" type="ns0:hotelAvailNotifRQ"/>
+   <xsd:element name="OTA_NotifReportRS" type="ns0:notifReportRS"/>
+   <xsd:element name="OTA_ErrorRS" type="ns0:errorRS"/>
+   <xsd:element name="OTA_HotelAvailGetRQ" type="ns0:hotelAvailGetRQ"/>
+   <xsd:element name="OTA_CancelRQ" type="ns0:cancelRQ"/>
+   <xsd:element name="OTA_HotelResNotifRQ" type="ns0:hotelResNotifRQ"/>
+   <xsd:element name="OTA_HotelInvCountRQ" type="ns0:hotelInvCountRQ"/>
+   <xsd:element name="OTA_ReadRQ" type="ns0:readRQ"/>
+   <xsd:simpleType name="UIT">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="24"/>
+         <xsd:enumeration value="14"/>
+         <xsd:enumeration value="10"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="BookingLimitMessageType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="SetLimit"/>
+         <xsd:enumeration value="AdjustLimit"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="EmailType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="1"/>
+         <xsd:enumeration value="10"/>
+         <xsd:enumeration value="11"/>
+         <xsd:enumeration value="12"/>
+         <xsd:enumeration value="13"/>
+         <xsd:enumeration value="14"/>
+         <xsd:enumeration value="15"/>
+         <xsd:enumeration value="16"/>
+         <xsd:enumeration value="17"/>
+         <xsd:enumeration value="18"/>
+         <xsd:enumeration value="19"/>
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="3"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="5"/>
+         <xsd:enumeration value="6"/>
+         <xsd:enumeration value="7"/>
+         <xsd:enumeration value="8"/>
+         <xsd:enumeration value="9"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ActionType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Allocation"/>
+         <xsd:enumeration value="Used"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="CountType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="21"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="5"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="StayContext">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Checkin"/>
+         <xsd:enumeration value="Checkout"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="MealPlanType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="1"/>
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="6"/>
+         <xsd:enumeration value="7"/>
+         <xsd:enumeration value="9"/>
+         <xsd:enumeration value="10"/>
+         <xsd:enumeration value="12"/>
+         <xsd:enumeration value="17"/>
+         <xsd:enumeration value="19"/>
+         <xsd:enumeration value="14"/>
+         <xsd:enumeration value="21"/>
+         <xsd:enumeration value="22"/>
+         <xsd:enumeration value="23"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="SelectionType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="All"/>
+         <xsd:enumeration value="Undelivered"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="OffsetDropTime">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="AfterArrival"/>
+         <xsd:enumeration value="AfterBooking"/>
+         <xsd:enumeration value="AfterConfirmation"/>
+         <xsd:enumeration value="AfterDeparture"/>
+         <xsd:enumeration value="BeforeArrival"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ErrorStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Complete"/>
+         <xsd:enumeration value="Incomplete"/>
+         <xsd:enumeration value="NotProcessed"/>
+         <xsd:enumeration value="Unknown"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="TimeUnit">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Year"/>
+         <xsd:enumeration value="Month"/>
+         <xsd:enumeration value="Week"/>
+         <xsd:enumeration value="Day"/>
+         <xsd:enumeration value="Hour"/>
+         <xsd:enumeration value="Second"/>
+         <xsd:enumeration value="FullDuration"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="TextFormat">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="HTML"/>
+         <xsd:enumeration value="PlainText"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="PaymentType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="28"/>
+         <xsd:enumeration value="43"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="MinMaxMessageType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="MinLOS"/>
+         <xsd:enumeration value="MaxLOS"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="DateType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="ArrivalDate"/>
+         <xsd:enumeration value="CreateDate"/>
+         <xsd:enumeration value="DepartureDate"/>
+         <xsd:enumeration value="LastUpdateDate"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="CommissionApplicability">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="AllRates"/>
+         <xsd:enumeration value="NoRates"/>
+         <xsd:enumeration value="SomeRates"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ProfileType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="1"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="EWT">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="1"/>
+         <xsd:enumeration value="10"/>
+         <xsd:enumeration value="11"/>
+         <xsd:enumeration value="12"/>
+         <xsd:enumeration value="13"/>
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="3"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="5"/>
+         <xsd:enumeration value="6"/>
+         <xsd:enumeration value="7"/>
+         <xsd:enumeration value="8"/>
+         <xsd:enumeration value="9"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="RestrictionStatusType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Close"/>
+         <xsd:enumeration value="Open"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="HotelTaxType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Cumulative"/>
+         <xsd:enumeration value="Exclusive"/>
+         <xsd:enumeration value="Inclusive"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="RestrictionType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Arrival"/>
+         <xsd:enumeration value="Departure"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ResStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Book"/>
+         <xsd:enumeration value="Cancel"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="GuaranteeType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="PrePay"/>
+         <xsd:enumeration value="CC/DC/Voucher"/>
+         <xsd:enumeration value="None"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ChargeType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="1"/>
+         <xsd:enumeration value="10"/>
+         <xsd:enumeration value="12"/>
+         <xsd:enumeration value="13"/>
+         <xsd:enumeration value="14"/>
+         <xsd:enumeration value="15"/>
+         <xsd:enumeration value="17"/>
+         <xsd:enumeration value="18"/>
+         <xsd:enumeration value="19"/>
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="20"/>
+         <xsd:enumeration value="21"/>
+         <xsd:enumeration value="22"/>
+         <xsd:enumeration value="24"/>
+         <xsd:enumeration value="25"/>
+         <xsd:enumeration value="26"/>
+         <xsd:enumeration value="30"/>
+         <xsd:enumeration value="31"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="5"/>
+         <xsd:enumeration value="7"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="RoomAmenityType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="1"/>
+         <xsd:enumeration value="10"/>
+         <xsd:enumeration value="100"/>
+         <xsd:enumeration value="101"/>
+         <xsd:enumeration value="102"/>
+         <xsd:enumeration value="103"/>
+         <xsd:enumeration value="104"/>
+         <xsd:enumeration value="105"/>
+         <xsd:enumeration value="106"/>
+         <xsd:enumeration value="107"/>
+         <xsd:enumeration value="108"/>
+         <xsd:enumeration value="109"/>
+         <xsd:enumeration value="11"/>
+         <xsd:enumeration value="110"/>
+         <xsd:enumeration value="111"/>
+         <xsd:enumeration value="112"/>
+         <xsd:enumeration value="113"/>
+         <xsd:enumeration value="114"/>
+         <xsd:enumeration value="115"/>
+         <xsd:enumeration value="116"/>
+         <xsd:enumeration value="117"/>
+         <xsd:enumeration value="118"/>
+         <xsd:enumeration value="119"/>
+         <xsd:enumeration value="12"/>
+         <xsd:enumeration value="120"/>
+         <xsd:enumeration value="121"/>
+         <xsd:enumeration value="122"/>
+         <xsd:enumeration value="123"/>
+         <xsd:enumeration value="124"/>
+         <xsd:enumeration value="125"/>
+         <xsd:enumeration value="126"/>
+         <xsd:enumeration value="127"/>
+         <xsd:enumeration value="128"/>
+         <xsd:enumeration value="129"/>
+         <xsd:enumeration value="13"/>
+         <xsd:enumeration value="130"/>
+         <xsd:enumeration value="131"/>
+         <xsd:enumeration value="132"/>
+         <xsd:enumeration value="133"/>
+         <xsd:enumeration value="134"/>
+         <xsd:enumeration value="135"/>
+         <xsd:enumeration value="136"/>
+         <xsd:enumeration value="137"/>
+         <xsd:enumeration value="138"/>
+         <xsd:enumeration value="139"/>
+         <xsd:enumeration value="14"/>
+         <xsd:enumeration value="140"/>
+         <xsd:enumeration value="141"/>
+         <xsd:enumeration value="142"/>
+         <xsd:enumeration value="143"/>
+         <xsd:enumeration value="144"/>
+         <xsd:enumeration value="145"/>
+         <xsd:enumeration value="146"/>
+         <xsd:enumeration value="147"/>
+         <xsd:enumeration value="148"/>
+         <xsd:enumeration value="149"/>
+         <xsd:enumeration value="15"/>
+         <xsd:enumeration value="150"/>
+         <xsd:enumeration value="151"/>
+         <xsd:enumeration value="152"/>
+         <xsd:enumeration value="153"/>
+         <xsd:enumeration value="154"/>
+         <xsd:enumeration value="155"/>
+         <xsd:enumeration value="156"/>
+         <xsd:enumeration value="157"/>
+         <xsd:enumeration value="158"/>
+         <xsd:enumeration value="159"/>
+         <xsd:enumeration value="16"/>
+         <xsd:enumeration value="160"/>
+         <xsd:enumeration value="161"/>
+         <xsd:enumeration value="162"/>
+         <xsd:enumeration value="163"/>
+         <xsd:enumeration value="164"/>
+         <xsd:enumeration value="165"/>
+         <xsd:enumeration value="166"/>
+         <xsd:enumeration value="167"/>
+         <xsd:enumeration value="168"/>
+         <xsd:enumeration value="169"/>
+         <xsd:enumeration value="17"/>
+         <xsd:enumeration value="170"/>
+         <xsd:enumeration value="171"/>
+         <xsd:enumeration value="172"/>
+         <xsd:enumeration value="173"/>
+         <xsd:enumeration value="174"/>
+         <xsd:enumeration value="175"/>
+         <xsd:enumeration value="176"/>
+         <xsd:enumeration value="177"/>
+         <xsd:enumeration value="178"/>
+         <xsd:enumeration value="179"/>
+         <xsd:enumeration value="18"/>
+         <xsd:enumeration value="180"/>
+         <xsd:enumeration value="181"/>
+         <xsd:enumeration value="182"/>
+         <xsd:enumeration value="183"/>
+         <xsd:enumeration value="184"/>
+         <xsd:enumeration value="185"/>
+         <xsd:enumeration value="186"/>
+         <xsd:enumeration value="187"/>
+         <xsd:enumeration value="188"/>
+         <xsd:enumeration value="189"/>
+         <xsd:enumeration value="19"/>
+         <xsd:enumeration value="190"/>
+         <xsd:enumeration value="191"/>
+         <xsd:enumeration value="192"/>
+         <xsd:enumeration value="193"/>
+         <xsd:enumeration value="194"/>
+         <xsd:enumeration value="195"/>
+         <xsd:enumeration value="196"/>
+         <xsd:enumeration value="197"/>
+         <xsd:enumeration value="198"/>
+         <xsd:enumeration value="199"/>
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="20"/>
+         <xsd:enumeration value="200"/>
+         <xsd:enumeration value="201"/>
+         <xsd:enumeration value="202"/>
+         <xsd:enumeration value="203"/>
+         <xsd:enumeration value="204"/>
+         <xsd:enumeration value="205"/>
+         <xsd:enumeration value="206"/>
+         <xsd:enumeration value="207"/>
+         <xsd:enumeration value="208"/>
+         <xsd:enumeration value="209"/>
+         <xsd:enumeration value="21"/>
+         <xsd:enumeration value="210"/>
+         <xsd:enumeration value="211"/>
+         <xsd:enumeration value="212"/>
+         <xsd:enumeration value="213"/>
+         <xsd:enumeration value="214"/>
+         <xsd:enumeration value="215"/>
+         <xsd:enumeration value="216"/>
+         <xsd:enumeration value="217"/>
+         <xsd:enumeration value="218"/>
+         <xsd:enumeration value="219"/>
+         <xsd:enumeration value="22"/>
+         <xsd:enumeration value="220"/>
+         <xsd:enumeration value="221"/>
+         <xsd:enumeration value="222"/>
+         <xsd:enumeration value="223"/>
+         <xsd:enumeration value="224"/>
+         <xsd:enumeration value="225"/>
+         <xsd:enumeration value="226"/>
+         <xsd:enumeration value="227"/>
+         <xsd:enumeration value="228"/>
+         <xsd:enumeration value="229"/>
+         <xsd:enumeration value="23"/>
+         <xsd:enumeration value="230"/>
+         <xsd:enumeration value="231"/>
+         <xsd:enumeration value="232"/>
+         <xsd:enumeration value="233"/>
+         <xsd:enumeration value="234"/>
+         <xsd:enumeration value="235"/>
+         <xsd:enumeration value="236"/>
+         <xsd:enumeration value="237"/>
+         <xsd:enumeration value="238"/>
+         <xsd:enumeration value="239"/>
+         <xsd:enumeration value="24"/>
+         <xsd:enumeration value="240"/>
+         <xsd:enumeration value="241"/>
+         <xsd:enumeration value="242"/>
+         <xsd:enumeration value="243"/>
+         <xsd:enumeration value="244"/>
+         <xsd:enumeration value="245"/>
+         <xsd:enumeration value="246"/>
+         <xsd:enumeration value="247"/>
+         <xsd:enumeration value="248"/>
+         <xsd:enumeration value="249"/>
+         <xsd:enumeration value="25"/>
+         <xsd:enumeration value="250"/>
+         <xsd:enumeration value="251"/>
+         <xsd:enumeration value="252"/>
+         <xsd:enumeration value="253"/>
+         <xsd:enumeration value="254"/>
+         <xsd:enumeration value="255"/>
+         <xsd:enumeration value="256"/>
+         <xsd:enumeration value="257"/>
+         <xsd:enumeration value="258"/>
+         <xsd:enumeration value="259"/>
+         <xsd:enumeration value="26"/>
+         <xsd:enumeration value="260"/>
+         <xsd:enumeration value="261"/>
+         <xsd:enumeration value="262"/>
+         <xsd:enumeration value="263"/>
+         <xsd:enumeration value="264"/>
+         <xsd:enumeration value="265"/>
+         <xsd:enumeration value="266"/>
+         <xsd:enumeration value="267"/>
+         <xsd:enumeration value="268"/>
+         <xsd:enumeration value="269"/>
+         <xsd:enumeration value="27"/>
+         <xsd:enumeration value="270"/>
+         <xsd:enumeration value="271"/>
+         <xsd:enumeration value="272"/>
+         <xsd:enumeration value="273"/>
+         <xsd:enumeration value="274"/>
+         <xsd:enumeration value="275"/>
+         <xsd:enumeration value="276"/>
+         <xsd:enumeration value="277"/>
+         <xsd:enumeration value="278"/>
+         <xsd:enumeration value="279"/>
+         <xsd:enumeration value="28"/>
+         <xsd:enumeration value="280"/>
+         <xsd:enumeration value="29"/>
+         <xsd:enumeration value="3"/>
+         <xsd:enumeration value="30"/>
+         <xsd:enumeration value="31"/>
+         <xsd:enumeration value="32"/>
+         <xsd:enumeration value="33"/>
+         <xsd:enumeration value="34"/>
+         <xsd:enumeration value="35"/>
+         <xsd:enumeration value="36"/>
+         <xsd:enumeration value="37"/>
+         <xsd:enumeration value="38"/>
+         <xsd:enumeration value="39"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="40"/>
+         <xsd:enumeration value="41"/>
+         <xsd:enumeration value="42"/>
+         <xsd:enumeration value="43"/>
+         <xsd:enumeration value="44"/>
+         <xsd:enumeration value="45"/>
+         <xsd:enumeration value="46"/>
+         <xsd:enumeration value="47"/>
+         <xsd:enumeration value="48"/>
+         <xsd:enumeration value="49"/>
+         <xsd:enumeration value="5"/>
+         <xsd:enumeration value="50"/>
+         <xsd:enumeration value="51"/>
+         <xsd:enumeration value="52"/>
+         <xsd:enumeration value="53"/>
+         <xsd:enumeration value="54"/>
+         <xsd:enumeration value="55"/>
+         <xsd:enumeration value="56"/>
+         <xsd:enumeration value="57"/>
+         <xsd:enumeration value="58"/>
+         <xsd:enumeration value="59"/>
+         <xsd:enumeration value="6"/>
+         <xsd:enumeration value="60"/>
+         <xsd:enumeration value="61"/>
+         <xsd:enumeration value="62"/>
+         <xsd:enumeration value="63"/>
+         <xsd:enumeration value="64"/>
+         <xsd:enumeration value="65"/>
+         <xsd:enumeration value="66"/>
+         <xsd:enumeration value="67"/>
+         <xsd:enumeration value="68"/>
+         <xsd:enumeration value="69"/>
+         <xsd:enumeration value="7"/>
+         <xsd:enumeration value="70"/>
+         <xsd:enumeration value="71"/>
+         <xsd:enumeration value="72"/>
+         <xsd:enumeration value="73"/>
+         <xsd:enumeration value="74"/>
+         <xsd:enumeration value="75"/>
+         <xsd:enumeration value="76"/>
+         <xsd:enumeration value="77"/>
+         <xsd:enumeration value="78"/>
+         <xsd:enumeration value="79"/>
+         <xsd:enumeration value="8"/>
+         <xsd:enumeration value="80"/>
+         <xsd:enumeration value="81"/>
+         <xsd:enumeration value="82"/>
+         <xsd:enumeration value="83"/>
+         <xsd:enumeration value="84"/>
+         <xsd:enumeration value="85"/>
+         <xsd:enumeration value="86"/>
+         <xsd:enumeration value="87"/>
+         <xsd:enumeration value="88"/>
+         <xsd:enumeration value="89"/>
+         <xsd:enumeration value="9"/>
+         <xsd:enumeration value="90"/>
+         <xsd:enumeration value="91"/>
+         <xsd:enumeration value="92"/>
+         <xsd:enumeration value="93"/>
+         <xsd:enumeration value="94"/>
+         <xsd:enumeration value="95"/>
+         <xsd:enumeration value="96"/>
+         <xsd:enumeration value="97"/>
+         <xsd:enumeration value="98"/>
+         <xsd:enumeration value="99"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="BankAccountType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Checking"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

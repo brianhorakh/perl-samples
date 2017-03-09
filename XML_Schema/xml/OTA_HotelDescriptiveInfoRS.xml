@@ -1,0 +1,37 @@
+<OTA_HotelDescriptiveInfoRS
+  xmlns="http://www.despegar.com/hotels/ota/v1/" Version="v1" CorrelationID="hconnect-mock-03-40634">
+  <Success/>
+  <HotelDescriptiveContents>
+    <HotelDescriptiveContent HotelCode="638049" HotelName="Europa Hotel">
+      <FacilityInfo>
+        <GuestRooms>
+          <GuestRoom MaxAdultOccupancy="3" MaxChildOccupancy="2" MaxOccupancy="3" MinOccupancy="1" ID="16482">
+            <TypeRoom Name="Sample Room withExtras"/>
+          </GuestRoom>
+          <GuestRoom MaxAdultOccupancy="3" MaxChildOccupancy="2" MaxOccupancy="3" MinOccupancy="1" ID="121756">
+            <TypeRoom Name="Sample Room DTO"/>
+          </GuestRoom>
+        </GuestRooms>
+      </FacilityInfo>
+      <Policies>
+        <Policy DefaultValidBookingMinOffset="0">
+          <CommissionPolicy CommissionApplicability="NoRates"/>
+          <TaxPolicies>
+            <TaxPolicy Type="Inclusive"/>
+          </TaxPolicies>
+          <StayRequirements>
+            <StayRequirement MaxLOS="30" MinLOS="1"/>
+            <StayRequirement StayContext="Checkin" Fri="Open" Mon="Open" Sat="Open" Sun="Open" Thur="Open" Tue="Open" Weds="Open"/>
+            <StayRequirement StayContext="Checkout" Fri="Open" Mon="Open" Sat="Open" Sun="Open" Thur="Open" Tue="Open" Weds="Open"/>
+          </StayRequirements>
+        </Policy>
+      </Policies>
+      <HotelInfo>
+        <Services>
+          <Service MealPlanCode="9"/>
+          <Service MealPlanCode="1"/>
+        </Services>
+      </HotelInfo>
+    </HotelDescriptiveContent>
+  </HotelDescriptiveContents>
+</OTA_HotelDescriptiveInfoRS>
